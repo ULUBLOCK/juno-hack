@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import Layout from '../components/Layout/layout'
 import type { AppProps } from 'next/app';
 import { defaultTheme, ChainProvider } from '@cosmos-kit/react';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -17,6 +18,7 @@ function CreateCosmosApp({ Component, pageProps }: AppProps) {
   };
 
   return (
+    <>
     <ChakraProvider theme={defaultTheme}>
       <ChainProvider
         chains={chains}
@@ -37,9 +39,12 @@ function CreateCosmosApp({ Component, pageProps }: AppProps) {
         wrappedWithChakra={true}
         signerOptions={signerOptions}
       >
-        <Component {...pageProps} />
+      <Layout>
+       <Component {...pageProps} />
+      </Layout>
       </ChainProvider>
     </ChakraProvider>
+    </>
   );
 }
 
