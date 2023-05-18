@@ -1,10 +1,10 @@
 import { Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Divider, Heading, Text } from "@chakra-ui/react";
 
-const HackathonCard = () => {
+const ProjectCard = () => {
   return (
     <Card>
       <CardHeader>
-        <Heading size="lg"> Hackathon 1 </Heading>
+        <Heading size="lg"> Project 1 </Heading>
       </CardHeader>
       <CardBody>
         <Text>
@@ -14,9 +14,6 @@ const HackathonCard = () => {
       <Divider/>
       <CardFooter>
         <ButtonGroup>
-          <Button colorScheme="green">
-            Join
-          </Button>
           <Button colorScheme="blue">
             More
           </Button>
@@ -26,4 +23,4 @@ const HackathonCard = () => {
   );
 }
  
-export default HackathonCard;
+export default ProjectCard;
