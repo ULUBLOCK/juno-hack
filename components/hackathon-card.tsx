@@ -14,10 +14,10 @@ const HackathonCard = () => {
       <Divider/>
       <CardFooter>
         <ButtonGroup>
-          <Button colorScheme="green">
+          <Button colorScheme="cyan" color="white">
             Join
           </Button>
-          <Button colorScheme="blue">
+          <Button colorScheme="blackAlpha">
             More
           </Button>
         </ButtonGroup>

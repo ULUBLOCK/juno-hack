@@ -12,7 +12,7 @@ const Hackathons = () => {
           <Text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non ultricies turpis. Nulla porttitor pretium interdum. Pellentesque tristique condimentum sagittis. Curabitur tortor odio, hendrerit commodo ultrices ac, rutrum ut nibh. Nulla ex lorem, laoreet id pretium vel, facilisis ut turpis.
           </Text>
-          <Button size="lg" colorScheme="green">
+          <Button size="lg" colorScheme="cyan" color="white">
             Join
           </Button>
         </div>

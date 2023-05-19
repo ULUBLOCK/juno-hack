@@ -14,7 +14,7 @@ const ProjectCard = () => {
       <Divider/>
       <CardFooter>
         <ButtonGroup>
-          <Button colorScheme="blue">
+          <Button colorScheme="cyan" color="white">
             More
           </Button>
         </ButtonGroup>
