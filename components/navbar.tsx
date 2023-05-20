@@ -11,7 +11,7 @@ export default function NavBar() {
         <nav className="bg-gray-300 w-full shadow">
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                 <div>
-                    <div className="flex items-center justify-between py-3 md:py-1 md:block">
+                    <div className="flex items-center justify-between py-1 md:py-1 md:block">
                         <a href="/">
                             <h2 className="text-2xl font-bold">
                             <Image alt="bt" src={Logo} width={90} height={90} objectFit="cover" />

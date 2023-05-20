@@ -2,8 +2,10 @@ import { useChain } from '@cosmos-kit/react';
 import {
   Box,
   Center,
+  Grid,
   GridItem,
   Icon,
+  Stack,
 } from '@chakra-ui/react';
 import { MouseEventHandler } from 'react';
 import { FiAlertTriangle } from 'react-icons/fi';
@@ -105,22 +107,37 @@ export const WalletSection = () => {
 
   return (
     <Center>
-      <>
+      <Grid
+        w="full"
+        maxW="sm"
+        templateColumns="1fr"
+        rowGap={4}
+        alignItems="center"
+        justifyContent="center"
+      >
         <GridItem>
           <ChainCard
             prettyName={chain?.label || chainName}
             icon={chain?.icon}
           />
         </GridItem>
-        <>
+        <GridItem px={6}>
+          <Stack
+            justifyContent="center"
+            alignItems="center"
+            borderRadius="lg"
+            spacing={4}
+            px={4}
+          >
             {userInfo}
             {addressBtn}
-            <Box>
+            <Box w="full" maxW={{ base: 52, md: 64 }}>
               {connectWalletButton}
             </Box>
             {connectWalletWarn && <GridItem>{connectWalletWarn}</GridItem>}
-        </>
-      </>
+          </Stack>
+        </GridItem>
+      </Grid>
     </Center>
   );
 };

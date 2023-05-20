@@ -12,7 +12,14 @@ import { FeatureProps } from './types';
 export const Product = ({ title, text, href }: FeatureProps) => {
   return (
     <Link href={href} target="_blank" _hover={{ textDecoration: 'none' }}>
-      <Stack>
+      <Stack
+        h="full"
+        minH={36}
+        p={5}
+        spacing={2.5}
+        justifyContent="center"
+        borderRadius={5}
+      >
         <Heading fontSize="xl">{title}&ensp;&rarr;</Heading>
         <Text>{text}</Text>
       </Stack>
@@ -33,7 +40,7 @@ export const Dependency = ({ title, text, href }: FeatureProps) => {
         borderRadius="md"
         border="1px solid"
       >
-        <Box>
+        <Box >
           <Icon as={LinkIcon} />
         </Box>
         <Stack spacing={1}>
