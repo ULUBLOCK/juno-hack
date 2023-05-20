@@ -8,7 +8,8 @@ export default function NavBar() {
     const [navbar, setNavbar] = useState(false);
 
     return (
-        <nav className="bg-gray-300 w-full shadow">
+        <>
+        <nav className="bg-gray-300 w-full shadow pt-2 ">
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                 <div>
                     <div className="flex items-center justify-between py-1 md:py-1 md:block">
@@ -58,7 +59,7 @@ export default function NavBar() {
                 </div>
                 <div>
                     <div
-                        className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+                        className={`items-center flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
                             navbar ? "block" : "hidden"
                         }`}
                     >
@@ -76,10 +77,12 @@ export default function NavBar() {
                         
                     </div>
                 </div>
-                <div className="">
-                    <WalletSection />
-                </div>
+                
             </div>
         </nav>
+        <div className="grid justify-items-end ">
+            <WalletSection />
+        </div>
+    </>
     );
 }

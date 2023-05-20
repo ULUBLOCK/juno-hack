@@ -82,13 +82,13 @@ export const WalletSection = () => {
       walletStatus={status}
       rejected={
         <RejectedWarn
-          icon={<Icon as={FiAlertTriangle} mt={1} />}
+          icon={<Icon as={FiAlertTriangle}  />}
           wordOfWarning={`${wallet?.prettyName}: ${message}`}
         />
       }
       error={
         <RejectedWarn
-          icon={<Icon as={FiAlertTriangle} mt={1} />}
+          icon={<Icon as={FiAlertTriangle}  />}
           wordOfWarning={`${wallet?.prettyName}: ${message}`}
         />
       }
