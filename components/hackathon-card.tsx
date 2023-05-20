@@ -14,12 +14,17 @@ const HackathonCard = () => {
       <Divider/>
       <CardFooter>
         <ButtonGroup>
-          <Button colorScheme="cyan" color="white">
+          <a href="/createteam">
+            <Button colorScheme="cyan" color="white">
             Join
           </Button>
+          </a>
+
+          <a href="/hackathoninfo">
           <Button colorScheme="blackAlpha">
             More
           </Button>
+          </a>
         </ButtonGroup>
       </CardFooter>
     </Card>

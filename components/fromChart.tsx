@@ -16,8 +16,8 @@ const fromChart = () => {
       <div className='flex flex-col mt-[4px]'>
         <div className='flex justify-between w-[100%]'>
           <div className='flex flex-col w-[45%] mb-5'>
-            <label className='font-bold mb-2'> Amount</label>
-            <input className='p-[10px] mt-[4px] border-[1px] w-[100%] rounded-[8px] border-black'  name="requiredAmount"  placeholder='Required Amount'></input>
+            <label className='font-bold mb-2'> Prize amount</label>
+            <input className='p-[10px] mt-[4px] border-[1px] w-[100%] rounded-[8px] border-black'  name="requiredAmount"  placeholder=' Amount'></input>
           </div>
           <div className='flex flex-col w-[45%]'>
             <label className='font-bold'>Choose Category</label>
@@ -31,10 +31,10 @@ const fromChart = () => {
       </div>
       <div className='flex flex-row w-[100%] mb-5 '>
       <div className='flex justify-between w-[100%]'>
-      {/* Image */}
-      <div className='flex flex-col mt-[10px] w-[45%]'>
+     {/* Image */}
+     <div className='flex flex-col mt-[10px] w-[45%]'>
         <label className='font-bold mb-2'>Select Image</label>
-        <input className='mt-[4px] w-[100%]' alt="dapp" >
+        <input className='mt-[4px] w-[100%]' alt="dapp"  type={'file'} accept='image/*'>
         </input>
       </div>
       {/* Upload Files to IPFS */}

@@ -11,7 +11,7 @@ export default function NavBar() {
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-1 md:block">
-                        <a href="javascript:void(0)">
+                        <a href="/">
                             <h2 className="text-2xl font-bold">
                             <Image alt="bt" src={Logo} width={90} height={90} objectFit="cover" />
                             </h2>
@@ -63,11 +63,14 @@ export default function NavBar() {
                         }`}
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                            <li className="text-black font-bold hover:text-[#1da7a4]">
-                                <a href="#">Create Hackathon</a>
+                        <li className="text-black font-bold hover:text-[#1da7a4]">
+                                <a href="/">Home</a>
                             </li>
                             <li className="text-black font-bold hover:text-[#1da7a4]">
-                                <a href="#">All Hackathons</a>
+                                <a href="/hackathons">All Hackathons</a>
+                            </li>
+                            <li className="text-black font-bold hover:text-[#1da7a4]">
+                                <a href="/createHack">Create Hackathon</a>
                             </li>
                         </ul>
                     </div>
