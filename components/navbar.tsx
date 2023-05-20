@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { WalletSection } from '../components';
+import Logo from "../public/images/logoNav.png";
+import Image from 'next/image'
 
 export default function NavBar() {
     const [navbar, setNavbar] = useState(false);
 
     return (
-        <nav className="w-full bg-white shadow">
+        <nav className="bg-gray-300 w-full shadow">
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                 <div>
-                    <div className="flex items-center justify-between py-3 md:py-5 md:block">
+                    <div className="flex items-center justify-between py-3 md:py-1 md:block">
                         <a href="javascript:void(0)">
-                            <h2 className="text-2xl font-bold">LOGO</h2>
+                            <h2 className="text-2xl font-bold">
+                            <Image alt="bt" src={Logo} width={90} height={90} objectFit="cover" />
+                            </h2>
                         </a>
                         <div className="md:hidden">
                             <button
@@ -47,8 +51,9 @@ export default function NavBar() {
                                     </svg>
                                 )}
                             </button>
+                            
                         </div>
-                        <WalletSection />
+                        
                     </div>
                 </div>
                 <div>
@@ -58,21 +63,16 @@ export default function NavBar() {
                         }`}
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                            <li className="text-gray-600 hover:text-blue-600">
-                                <a href="javascript:void(0)">Home</a>
+                            <li className="text-black font-bold hover:text-[#1da7a4]">
+                                <a href="#">Create Hackathon</a>
                             </li>
-                            <li className="text-gray-600 hover:text-blue-600">
-                                <a href="javascript:void(0)">Blog</a>
-                            </li>
-                            <li className="text-gray-600 hover:text-blue-600">
-                                <a href="javascript:void(0)">About US</a>
-                            </li>
-                            <li className="text-gray-600 hover:text-blue-600">
-                                <a href="javascript:void(0)">Contact US</a>
+                            <li className="text-black font-bold hover:text-[#1da7a4]">
+                                <a href="#">All Hackathons</a>
                             </li>
                         </ul>
                     </div>
                 </div>
+                    <WalletSection />
             </div>
         </nav>
     );
