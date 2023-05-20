@@ -1,6 +1,14 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react'
+import  { useRef, useState } from 'react';
 
 const fromChart = () => {
+  const [date, setDate] = useState('');
+  const dateInputRef = useRef(null);
+
+  const handleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setDate(e.target.value);
+  };
   return (
     <div className='flex flex-col'>
       <div className='mb-5'>
@@ -28,6 +36,16 @@ const fromChart = () => {
             </select>
           </div>
         </div>
+        <div className='mb-5'>
+        <label className='font-bold mb-2'>jury 1</label>
+        <input className='p-[15px] mt-[4px] border-[1px] w-[100%] rounded-[8px] border-black' placeholder='adress' name='HackathonTitle'>
+        </input>
+      </div>
+      <div className='mb-5'>
+        <label className='font-bold mb-2'>jury 2</label>
+        <input className='p-[15px] mt-[4px] border-[1px] w-[100%] rounded-[8px] border-black' placeholder='adress' name='HackathonTitle'>
+        </input>
+      </div>
       </div>
       <div className='flex flex-row w-[100%] mb-5 '>
       <div className='flex justify-between w-[100%]'>
@@ -36,6 +54,7 @@ const fromChart = () => {
         <label className='font-bold mb-2'>Select Image</label>
         <input className='mt-[4px] w-[100%]' alt="dapp"  type={'file'} accept='image/*'>
         </input>
+
       </div>
       {/* Upload Files to IPFS */}
        
@@ -46,12 +65,24 @@ const fromChart = () => {
       
        </div>
       </div>
+      
+       <div>
+      <p > <span className='font-bold'>Deadline : </span> {date}</p>
+      <input
+        type="date"
+        onChange={handleChange}
+        ref={dateInputRef}
+      />
+      
+    </div> 
+
       {/* Start DonationEvent */}
       <div className='flex justify-center'>
       <button className=' w-[60%] mt-[30px] p-2 font-bold rounded-[8px] bg-[#6AA4B0]' >
         Start Hackathon
       </button>
       </div>
+      
     </div>
   )
 }
