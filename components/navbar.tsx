@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import { useState } from "react";
 import { WalletSection } from '../components';
 import Logo from "../public/images/logoNav.png";
@@ -51,10 +52,9 @@ export default function NavBar() {
                                     </svg>
                                 )}
                             </button>
-                            
                         </div>
-                        
                     </div>
+                    
                 </div>
                 <div>
                     <div
@@ -73,9 +73,12 @@ export default function NavBar() {
                                 <a href="/createHack">Create Hackathon</a>
                             </li>
                         </ul>
+                        
                     </div>
                 </div>
+                <div className="">
                     <WalletSection />
+                </div>
             </div>
         </nav>
     );

@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 
 const Footer = () => {
   return (
-    <div className="bg-black mt-[150px] max-w-screen-max px-4 pb-5 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
+    <div className="bg-black mt-[50px] max-w-screen-max px-4 pb-5 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
 
         <div className="flex justify-center mt-4 space-x-6 text-white">
             <a href="#" className=" hover:text-gray-300">
