@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import { Button, Heading, Text } from "@chakra-ui/react";
 import ProjectCard from "../components/project-card";
 
@@ -12,9 +13,11 @@ const Hackathons = () => {
           <Text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non ultricies turpis. Nulla porttitor pretium interdum. Pellentesque tristique condimentum sagittis. Curabitur tortor odio, hendrerit commodo ultrices ac, rutrum ut nibh. Nulla ex lorem, laoreet id pretium vel, facilisis ut turpis.
           </Text>
+          <a href="/createteam">
           <Button size="lg" colorScheme="cyan" color="white">
             Join
           </Button>
+          </a>
         </div>
         <div className="grid gap-4 lg:grid-cols-3 grid-cols-1">
           <ProjectCard/>
