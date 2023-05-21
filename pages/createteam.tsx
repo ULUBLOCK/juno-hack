@@ -1,17 +1,17 @@
-import { Button, FormControl, FormLabel, Heading, Input, Text, Textarea } from "@chakra-ui/react";
+import { FormControl, FormLabel, Heading, Input, Text, Textarea } from "@chakra-ui/react";
 
 const CreateTeam = () => {
   return (
     <div className="w-full flex justify-center">
-      <div className="max-w-3xl mx-4 my-8">
+      <div className="w-[100%] mx-4 my-8">
 
         <div className="flex flex-col gap-8 items-center border-2 rounded-xl p-4">
           <Heading>
             Create Your Team
           </Heading>
 
-          <div className="flex flex-col items-start gap-6">
-            <div className="flex gap-4">
+          <div className="flex flex-col items-start gap-6 w-[90%]">
+            <div className="flex gap-[50px] w-[100%]">
               <FormControl>
                 <FormLabel>Team name</FormLabel>
                 <Input placeholder="MyTeam"/>
@@ -32,9 +32,9 @@ const CreateTeam = () => {
               <Textarea placeholder="Our project is about..."/>
             </FormControl>
 
-            <Button size="lg" colorScheme="blue">
+            <button className='w-[30%] mt-[30px] p-2 font-bold rounded-[8px] bg-slate-400' >
               Upload Project Logo
-            </Button>
+            </button>
 
             <FormControl>
               <FormLabel>Presentation link</FormLabel>
@@ -47,9 +47,9 @@ const CreateTeam = () => {
             </FormControl>
           </div>
 
-          <Button size="lg" colorScheme="green">
+          <button className=' w-[40%] mt-[30px] p-2 font-bold rounded-[8px] bg-[#6AA4B0]' >
             Apply!
-          </Button>
+          </button>
         </div>
       </div>
     </div>
