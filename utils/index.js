@@ -24,7 +24,7 @@ export const connect = async () => {
   return state;
 }
 
-const contract = "juno1436kxs0w2es6xlqpp9rd35e3d0cjnw4sv8j3a7483sgks29jqwgs44adts";
+export const contract = "juno1hzz0s0ucrhdp6tue2lxk3c03nj6f60qy463we7lgx0wudd72ctmsvdsw60";
 
 export const getData = async (client) => {
   const data = await client.queryContractSmart(contract, { config: {}});
@@ -35,7 +35,7 @@ const WalletContext = createContext();
 export const useWallet = () => useContext(WalletContext);
 
 export const WalletProvider = ({children}) => {
-  const [wallet, setWallet] = useState({});
+  const [wallet, setWallet] = useState(undefined);
 
   useEffect(() => {
     // const state = localStorage.getItem("wallet");
@@ -43,26 +43,6 @@ export const WalletProvider = ({children}) => {
     //   setWallet(state);
     // }
 
-    (async function tmp() {
-      setWallet(await connect());
-      
-    })();
-  }, []);
-
-  return (
-    <WalletContext.Provider value={{wallet, setWallet}}>
-      {children}
-    </WalletContext.Provider>
-  );
-};
-
-const DataContext = createContext();
-export const useData = () => useContext(WalletContext);
-
-export const DataProvider = ({children}) => {
-  const [data, setData] = useState(undefined);
-
-  useEffect(() => {
     (async function tmp() {
       setWallet(await connect());
     })();

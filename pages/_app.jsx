@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import Layout from '../components/Layout/layout'
 import { ChakraProvider } from '@chakra-ui/react';
-import { WalletProvider } from "../utils"
+import { DataProvider, WalletProvider } from "../utils"
 
 function MyApp({ Component, pageProps }) {
     return (

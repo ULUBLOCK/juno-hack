@@ -7,8 +7,58 @@ import { connect, useWallet } from "../utils"
 export default function NavBar() {
     const [navbar, setNavbar] = useState(false);
 
-    const {wallet, setWallet} = useWallet();
+    const [address, setAddress] = useState("");
 
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        setAddress(localStorage.getItem('keplrAddress') || "");
+      }
+    }, []);
+    
+    const [isConnected, setConnected] = useState(false);
+    
+      useEffect(() => {
+        const connectedStatus = localStorage.getItem('keplrConnected');
+        if (connectedStatus === 'true') {
+          setConnected(true);
+        }
+      }, []);
+
+      useEffect(() => {
+        if (isConnected) {
+          localStorage.setItem('keplrConnected', 'true');
+        } else {
+          localStorage.removeItem('keplrConnected');
+        }
+      }, [isConnected]);
+    
+      const connectWallet = async () => {
+        if (window.keplr) {
+          const chainId = "testing";
+          await window.keplr.enable(chainId);
+          const offlineSigner = window.keplr.getOfflineSigner(chainId);
+          const accounts = await offlineSigner.getAccounts();
+          if (accounts.length > 0) {
+            const address = accounts[0].address;
+            setAddress(address);
+            localStorage.setItem('keplrAddress', address);
+            setConnected(true);
+          }
+        } else {
+          alert("Please install Keplr extension.");
+        }
+      };
+      
+      const disconnectWallet = () => {
+        setConnected(false);
+        setAddress("");
+        localStorage.removeItem('keplrConnected');
+        localStorage.removeItem('keplrAddress');
+      };
+    
+/**
+ * 
+ */
     return (
         <>
         <nav className="bg-gray-300 w-full shadow pt-2 ">
@@ -82,26 +132,15 @@ export default function NavBar() {
                 
             </div>
         </nav>
-        <div className="flex w-full items-center gap-4 px-8">
-            <button className="bg-[#1da7a4] px-8 py-4 rounded-xl text-white my-3"
-            onClick={async () => {
-                const wallet = await connect();
-                localStorage.setItem("state", wallet);
-                setWallet(wallet);
-            }}>
-                Connect
-            </button>
-            <span>{wallet?.account?.address}</span>
-        </div>
-
-{/* <div className="flex flex-col items-center justify-center">
-      <button onClick={connect} className="py-2 mt-20 mb-4 text-lg font-bold text-white rounded-lg w-56 bg-blue-600 hover:bg-blue-800">Connect to MetaMask</button>
-      {active ? <span>Connected with <b>{account}</b></span> : <span>Not connected</span>}
-      <button onClick={disconnect} className="py-2 mt-20 mb-4 text-lg font-bold text-white rounded-lg w-56 bg-blue-600 hover:bg-blue-800">Disconnect</button>
-    </div> */}
-
-
         
+        <div className="flex w-full items-center gap-4 px-8">
+      <button className="bg-[#1da7a4] px-8 py-4 rounded-xl text-white my-3" onClick={connectWallet}>Connect Wallet</button>
+      {isConnected &&
+      <button className="bg-[#1da7a4] px-8 py-4 rounded-xl text-white my-3" onClick={disconnectWallet}>Disconnect Wallet</button>
+    }
+    {isConnected && <p>Wallet is connected with address: {address}</p>}
+  </div>
+
     </>
     );
 }
