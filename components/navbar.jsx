@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import { useState } from "react";
-import { WalletSection } from '../components';
+import { useEffect, useState } from "react";
 import Logo from "../public/images/logoNav.png";
 import Image from 'next/image'
+import { connect, useWallet } from "../utils"
 
 export default function NavBar() {
     const [navbar, setNavbar] = useState(false);
+
+    const {wallet, setWallet} = useWallet();
 
     return (
         <>
@@ -80,9 +82,26 @@ export default function NavBar() {
                 
             </div>
         </nav>
-        <div className="grid justify-items-end ">
-            <WalletSection />
+        <div className="flex w-full items-center gap-4 px-8">
+            <button className="bg-[#1da7a4] px-8 py-4 rounded-xl text-white my-3"
+            onClick={async () => {
+                const wallet = await connect();
+                localStorage.setItem("state", wallet);
+                setWallet(wallet);
+            }}>
+                Connect
+            </button>
+            <span>{wallet?.account?.address}</span>
         </div>
+
+{/* <div className="flex flex-col items-center justify-center">
+      <button onClick={connect} className="py-2 mt-20 mb-4 text-lg font-bold text-white rounded-lg w-56 bg-blue-600 hover:bg-blue-800">Connect to MetaMask</button>
+      {active ? <span>Connected with <b>{account}</b></span> : <span>Not connected</span>}
+      <button onClick={disconnect} className="py-2 mt-20 mb-4 text-lg font-bold text-white rounded-lg w-56 bg-blue-600 hover:bg-blue-800">Disconnect</button>
+    </div> */}
+
+
+        
     </>
     );
 }
