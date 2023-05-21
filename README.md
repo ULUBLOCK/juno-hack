@@ -1,76 +1,62 @@
-This is a Cosmos App project bootstrapped with [`create-cosmos-app`](https://github.com/cosmology-tech/create-cosmos-app).
+# Setup Guide
+for local development.
 
-## Getting Started
+## Requirements
+- junod cli tool
+- docker
+- yarn
+- rust tools
 
-First, install the packages and run the development server:
 
-```bash
-yarn && yarn dev
+##  Web app setup
+Go to the root of the project then run in order:
+```
+yarn
+yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Contract deployment
+Start local junod node:
+```
+docker run -it \
+  --name juno_node_1 \
+  -p 1317:1317 \
+  -p 26656:26656 \
+  -p 26657:26657 \
+  -e STAKE_TOKEN=ujunox \
+  -e UNSAFE_CORS=true \
+  ghcr.io/cosmoscontracts/juno:14.1.0 \
+  ./setup_and_run.sh juno16g2rahf5846rxzp3fwlswy08fz8ccuwk03k57y
+```
 
-## Learn More 
+Change cwd to contract directory then run this to compile the contract:
+```
+docker run --rm -v "$(pwd)":/code \
+  --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
+  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
+  cosmwasm/rust-optimizer-arm64:0.12.11
+```
+Copy compiled wasm output to local testnet:
+```
+docker cp artifacts/cw_voting-aarch64.wasm juno_node_1:/contract.wasm
+```
+Deploy wasm binary to network and save the tx hash:
+```
+docker exec -i juno_node_1 \
+junod tx wasm store "/contract.wasm" \
+--gas-prices 0.1ujunox --gas auto --gas-adjustment 1.3 \
+-y -b block --chain-id testing \
+--from validator --output json
+```
+Use the tx hash to obtain code id:
 
-### Chain Registry
+```
+CODE_ID=$(junod q tx <tx hash here> --output json | jq -r  '.logs[0].events[] | select(.type == "store_code").attributes[] | select(.key == "code_id").value')  &&  echo  "Code Id: $CODE_ID"
+```
 
-The npm package for the Official Cosmos chain registry. Get chain and token data for you application.
-
-* https://github.com/cosmology-tech/chain-registry
-
-### Cosmology Videos
-
-Checkout more videos for how to use various frontend tooling in the Cosmos!
-
-* https://cosmology.tech/learn
-
-### Cosmos Kit
-
-A wallet connector for the Cosmos ⚛️
-
-* https://github.com/cosmology-tech/cosmos-kit
-
-### Telescope
-
-A "babel for the Cosmos", Telescope is a TypeScript Transpiler for Cosmos Protobufs. Telescope is used to generate libraries for Cosmos blockchains. Simply point to your protobuffer files and create developer-friendly Typescript libraries for teams to build on your blockchain.
-
-* https://github.com/osmosis-labs/telescope
-
-🎥 [Checkout the Telescope video playlist](https://www.youtube.com/watch?v=n82MsLe82mk&list=PL-lMkVv7GZwyQaK6bp6kMdOS5mzosxytC) to learn how to use `telescope`!
-
-### CosmWasm TS Codegen
-
-The quickest and easiest way to interact with CosmWasm Contracts. @cosmwasm/ts-codegen converts your CosmWasm smart contracts into dev-friendly TypeScript classes so you can focus on shipping code.
-
-* https://github.com/CosmWasm/ts-codegen
-
-🎥 [Checkout the CosmWasm/ts-codegne video playlist](https://www.youtube.com/watch?v=D_A5V2PfNLA&list=PL-lMkVv7GZwz1KO3jANwr5W4MoziruXwK) to learn how to use `ts-codegen`!
-
-
-## Learn More about Next.js
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## Credits
-
-🛠 Built by Cosmology — if you like our tools, please consider delegating to [our validator ⚛️](https://cosmology.tech/validator)
-
-Code built with the help of these related projects:
-
-* [@cosmwasm/ts-codegen](https://github.com/CosmWasm/ts-codegen) for generated CosmWasm contract Typescript classes
-* [@osmonauts/telescope](https://github.com/osmosis-labs/telescope) a "babel for the Cosmos", Telescope is a TypeScript Transpiler for Cosmos Protobufs.
-* [chain-registry](https://github.com/cosmology-tech/chain-registry) Cosmos chain registry and chain info.
-* [cosmos-kit](https://github.com/cosmology-tech/cosmos-kit) A wallet connector for the Cosmos.
+Use code id to initialize the contract.(Requires a wallet with sufficient balance and your public key)
+```
+junod tx wasm instantiate $CODE_ID '{}' --label contract5 --from wallet --chain-id=testing --gas=170000 --broadcast-mode=block -y --admin juno16g2rahf5846rxzp3fwlswy08fz8ccuwk03k57y
+```
+Output of this command gives you the contract address that you can use to interact with it.
