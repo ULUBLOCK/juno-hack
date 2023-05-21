@@ -1,27 +1,27 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Divider, Heading, Text } from "@chakra-ui/react";
 
-const HackathonCard = () => {
+const HackathonCard = ({ hackathon }) => {
   return (
     <Card>
       <CardHeader>
-        <Heading size="lg"> Hackathon 1 </Heading>
+        <Heading size="lg"> {hackathon.name} </Heading>
       </CardHeader>
       <CardBody>
         <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non ultricies turpis. Nulla porttitor pretium interdum.
+          {hackathon.description}
         </Text>
       </CardBody>
       <Divider/>
       <CardFooter>
         <ButtonGroup>
-          <a href="/createteam">
+          <a href={"/createteam/" + hackathon.id.toString()}>
             <Button colorScheme="cyan" color="white">
             Join
           </Button>
           </a>
 
-          <a href="/hackathoninfo">
+          <a href={"/hackathoninfo/" + hackathon.id.toString()}>
           <Button colorScheme="blackAlpha">
             More
           </Button>
