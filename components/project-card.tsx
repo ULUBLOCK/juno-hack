@@ -14,9 +14,11 @@ const ProjectCard = () => {
       <Divider/>
       <CardFooter>
         <ButtonGroup>
+          <a href="/projectinfo">
           <Button colorScheme="cyan" color="white">
             More
           </Button>
+          </a>
         </ButtonGroup>
       </CardFooter>
     </Card>

@@ -1,4 +1,4 @@
-import { Box, Stack, useColorModeValue, Image, Text } from '@chakra-ui/react';
+import { Box, Stack, Image, Text } from '@chakra-ui/react';
 import { ChainCardProps } from '../types';
 
 export const ChainCard = (props: ChainCardProps) => {
@@ -10,7 +10,7 @@ export const ChainCard = (props: ChainCardProps) => {
       spacing={3}
       overflow="hidden"
       wordBreak="break-word"
-      color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
+      color='blackAlpha.800'
       w="full"
     >
       <Box
@@ -21,7 +21,7 @@ export const ChainCard = (props: ChainCardProps) => {
         w="full"
         h="full"
         border="1px solid"
-        borderColor={useColorModeValue('blackAlpha.200', 'whiteAlpha.200')}
+        borderColor='blackAlpha.200'
         borderRadius="full"
         overflow="hidden"
       >
